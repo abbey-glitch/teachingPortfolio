@@ -26,6 +26,22 @@ server.get("/", (req, res)=>{
     res.send("WELCOME TO MY FIRST ENPOINT HOMEPAGE")
 })
 
+server.post("/register/user", async(req, res)=>{
+    const {firstname, lastname, email, password} = req.body
+    if(!firstname || !lastname || !email || !password){
+        res.status(301).send("field should not be empty")
+    }else{
+        const profile = {
+            firstname,
+            lastname,
+            email,
+            password
+        }
+        // save to database
+        res.status(200).send(profile)
+    }
+})
+
 // set up a server instance
 server.listen(port, ()=>{
     console.log(`server is live on: http://localhost:${port}`);
